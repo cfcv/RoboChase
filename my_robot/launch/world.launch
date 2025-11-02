@@ -2,16 +2,17 @@
 
 <launch>
 
-  <!-- World File -->
-  <arg name="world_file" default="$(find my_robot)/worlds/empty.world"/>
+    <!-- World File -->
+    <arg name="world_file" default="$(find my_robot)/worlds/empty.world"/>
 
-  <!-- Launch Gazebo World -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="use_sim_time" value="true"/>
-    <arg name="debug" value="false"/>
-    <arg name="gui" value="true" />
-    <arg name="world_name" value="$(arg world_file)"/>
-  </include>
+    <!-- Launch Gazebo World -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true"/>
+        <arg name="debug" value="false"/>
+        <arg name="gui" value="true" />
+        <arg name="world_name" value="$(arg world_file)"/>
+    </include>
+
     <!-- Robot pose -->
     <arg name="x" default="0"/>
     <arg name="y" default="0"/>
@@ -21,5 +22,12 @@
     <arg name="yaw" default="0"/>
 
     <!-- Launch other relevant files-->
-    <include file="$(find my_robot)/launch/robot_description.launch"/>
+    <include file="$(find my_robot)/launch/robot_description.launch">
+        <arg name="x" value="$(arg x)"/>
+        <arg name="y" value="$(arg y)"/>
+        <arg name="z" value="$(arg z)"/>
+        <arg name="roll" value="$(arg roll)"/>
+        <arg name="pitch" value="$(arg pitch)"/>
+        <arg name="yaw" value="$(arg yaw)"/>
+    </indluce>
 </launch>
